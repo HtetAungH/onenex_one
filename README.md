@@ -1,16 +1,53 @@
-# React + Vite
+Innovation & Growth Branding Project
+A modern, high-performance React landing page developed as part of a technical interview task. The project focuses on recreating a specific UI design with smooth animations and integrating a live data source with professional state management.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Key Technical Decisions
+1. State Management & API Integration
+To satisfy the requirement for proper state management and caching, I implemented TanStack Query (React Query):
 
-Currently, two official plugins are available:
+Caching: The application caches live market data for 1 minute (staleTime: 60000), reducing redundant network calls and improving performance.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Loading & Error States: I utilized declarative flags (isLoading, isError) to provide a seamless user experience, including a loading spinner and graceful error handling.
 
-## React Compiler
+Optimization: I disabled refetchOnWindowFocus to prevent hitting API rate limits during the development process and to ensure the app remains stable during the review.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. UI & Animation Strategy
+Framer Motion: Used to create the high-fidelity animations seen in the reference video:
 
-## Expanding the ESLint configuration
+Staggered Entrance: API data cards enter the view sequentially using staggerChildren.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Infinite Marquee: A seamless, high-performance horizontal scroll for technology logos.
+
+Scroll Triggers: Components use whileInView to trigger animations only when they become visible to the user.
+
+Material UI (MUI): Employed for its robust layout system and theme-based styling, ensuring a fully responsive design across mobile and desktop.
+
+3. Visual Fidelity
+Asset Branding: Per the video reference, tech logos in the marquee were converted to SVG format and stylized using CSS filters (brightness(0) invert(1)) to maintain a uniform white aesthetic on the dark background.
+
+Parallax Effect: The two logo rows move in opposite directions to create a dynamic depth effect as seen in the reference video.
+
+🛠️ Installation & Setup
+Clone the Repository:
+
+Bash
+git clone [your-github-link]
+Install Dependencies:
+
+Bash
+npm install
+Run the Project Locally:
+
+Bash
+npm run dev
+📁 Project Structure
+/src/components: Contains modular UI components like Hero, LogoMarquee, and Footer.
+
+/src/api: Logic for fetching live market data from the Binance API.
+
+App.jsx: The main entry point where QueryClientProvider wraps the application to enable global state management and caching.
+
+Important Interview Notes
+Git History: This project features a clear and meaningful commit history, showing the step-by-step evolution from UI setup to API integration.
+
+Clean Code: All files use functional components and follow modern ES6+ standards for readability and maintainability.
