@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
+// LogoMarquee.jsx
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
-// Updated data with high-quality SVG links to match the video
 const row1 = [
   {
     name: "Azure",
@@ -49,13 +49,12 @@ const ScrollingRow = ({ items, duration, direction = "left" }) => {
 
   useEffect(() => {
     if (ref.current) {
-      // Calculate width for seamless looping
-      setWidth(ref.current.scrollWidth / 3);
+      setWidth(ref.current.scrollWidth / 2);
     }
   }, [items]);
 
   return (
-    <Box sx={{ overflow: "hidden", display: "flex", py: 1 }}>
+    <Box sx={{ overflow: "hidden", display: "flex", py: 2 }}>
       <motion.div
         ref={ref}
         animate={{ x: isLeft ? [0, -width] : [-width, 0] }}
@@ -64,8 +63,7 @@ const ScrollingRow = ({ items, duration, direction = "left" }) => {
         }}
         style={{ display: "flex", gap: "60px", paddingRight: "60px" }}
       >
-        {/* Tripling items ensures no gaps in the loop */}
-        {[...items, ...items, ...items].map((item, index) => (
+        {[...items, ...items].map((item, index) => (
           <Box
             key={index}
             sx={{
@@ -73,30 +71,29 @@ const ScrollingRow = ({ items, duration, direction = "left" }) => {
               alignItems: "center",
               gap: 2,
               whiteSpace: "nowrap",
+              opacity: 0.7,
+              "&:hover": { opacity: 1 },
+              transition: "0.3s",
             }}
           >
-            {/* The Logo Icon - Filtered to white for the professional "Dark" look */}
             <Box
               component="img"
               src={item.logo}
               alt={item.name}
               sx={{
-                height: "24px",
+                height: "30px",
                 width: "auto",
-                filter: "brightness(0) invert(1)",
-                opacity: 0.9,
+                filter: "brightness(0) invert(1)", // Forces white logos
               }}
             />
-
             <Typography
               variant="subtitle1"
               sx={{
                 color: "white",
-                fontWeight: 700,
+                fontWeight: 600,
                 textTransform: "uppercase",
-                opacity: 0.8,
-                letterSpacing: 1.5,
-                fontSize: "0.9rem",
+                fontSize: "0.85rem",
+                letterSpacing: 1.2,
               }}
             >
               {item.name}
@@ -115,14 +112,13 @@ const LogoMarquee = () => {
         width: "100%",
         pt: 2,
         pb: 1,
-        // Gradient mask to fade logos at the edges
+        bgcolor: "#000000", // Ensure background is dark for white logos
         maskImage:
           "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
         WebkitMaskImage:
           "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
       }}
     >
-      {/* Parallax effect: Rows moving in opposite directions */}
       <ScrollingRow items={row1} duration={25} direction="left" />
       <ScrollingRow items={row2} duration={30} direction="right" />
     </Box>

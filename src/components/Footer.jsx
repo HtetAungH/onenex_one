@@ -1,3 +1,4 @@
+// Footer.jsx
 import {
   Box,
   Typography,
@@ -19,32 +20,35 @@ const Footer = () => {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.8 }}
       sx={{
-        bgcolor: "background.default", // Pulls #ffffff from theme
-        color: "text.primary", // Pulls #001a4d from theme
+        bgcolor: "primary.main", // Deep Navy
+        color: "white",
         py: { xs: 6, md: 10 },
       }}
     >
-      <Container maxWidth="lg">
-        {/* Main Branding Message */}
+      <Container>
         <Typography
           variant="h3"
           sx={{
             mb: 8,
-            color: "primary.main", // Pulls the OneNex blue
+            color: "white",
             fontSize: { xs: "1.8rem", md: "3rem" },
             lineHeight: 1.2,
+            fontWeight: 800,
           }}
         >
-          WE ARE YOUR PARTNER FOR <br />
-          <Box component="span" sx={{ color: "text.primary" }}>
+          WE ARE YOUR PARTNER FOR{" "}
+          <Box component="span" sx={{ color: "secondary.main" }}>
             INNOVATION & GROWTH
           </Box>
         </Typography>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={6}>
           {/* Column 1 */}
           <Grid size={{ xs: 12, sm: 4 }}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 2 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{ fontWeight: 700, mb: 3, color: "secondary.main" }}
+            >
               WE ONENEX
             </Typography>
             {["Cases", "Contact us", "Services"].map((text) => (
@@ -53,10 +57,11 @@ const Footer = () => {
                 href="#"
                 display="block"
                 sx={{
-                  color: "text.black",
+                  color: "rgba(255,255,255,0.7)",
                   mb: 1.5,
                   textDecoration: "none",
-                  "&:hover": { color: "primary.main" },
+                  fontWeight: 500,
+                  "&:hover": { color: "white", pl: 1, transition: "0.3s" },
                 }}
               >
                 {text}
@@ -66,7 +71,10 @@ const Footer = () => {
 
           {/* Column 2 */}
           <Grid size={{ xs: 12, sm: 4 }}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 2 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{ fontWeight: 700, mb: 3, color: "secondary.main" }}
+            >
               WE OFFER
             </Typography>
             {[
@@ -80,10 +88,11 @@ const Footer = () => {
                 href="#"
                 display="block"
                 sx={{
-                  color: "text.black",
+                  color: "rgba(255,255,255,0.7)",
                   mb: 1.5,
                   textDecoration: "none",
-                  "&:hover": { color: "primary.main" },
+                  fontWeight: 500,
+                  "&:hover": { color: "white", pl: 1, transition: "0.3s" },
                 }}
               >
                 {text}
@@ -93,18 +102,25 @@ const Footer = () => {
 
           {/* Column 3: Socials */}
           <Grid size={{ xs: 12, sm: 4 }}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 700, mb: 2 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{ fontWeight: 700, mb: 3, color: "secondary.main" }}
+            >
               FOLLOW US
             </Typography>
-            <Box sx={{ display: "flex", gap: 1 }}>
+            <Box sx={{ display: "flex", gap: 1.5 }}>
               {[<Facebook />, <Instagram />, <LinkedIn />, <YouTube />].map(
                 (icon, index) => (
                   <IconButton
                     key={index}
                     sx={{
-                      color: "primary.main",
-                      bgcolor: "rgba(0, 86, 179, 0.05)", // Subtle blue tint
-                      "&:hover": { bgcolor: "primary.main", color: "white" },
+                      color: "white",
+                      border: "1px solid rgba(255,255,255,0.2)",
+                      "&:hover": {
+                        bgcolor: "secondary.main",
+                        color: "primary.main",
+                        borderColor: "secondary.main",
+                      },
                     }}
                   >
                     {icon}
@@ -115,7 +131,7 @@ const Footer = () => {
           </Grid>
         </Grid>
 
-        <Divider sx={{ mt: 8, mb: 4, borderColor: "text.primary" }} />
+        <Divider sx={{ mt: 8, mb: 4, borderColor: "rgba(255,255,255,0.1)" }} />
 
         {/* Bottom Bar */}
         <Box
@@ -128,12 +144,12 @@ const Footer = () => {
           }}
         >
           <Typography
-            variant="h3"
-            sx={{ fontWeight: 900, color: "text.primary" }}
+            variant="h6"
+            sx={{ fontWeight: 900, color: "white", letterSpacing: 2 }}
           >
-            onenex
+            ONENEX
           </Typography>
-          <Typography variant="body2" sx={{ color: "text.primary" }}>
+          <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.5)" }}>
             ONENEX © COPYRIGHT 2026. ALL RIGHTS RESERVED.
           </Typography>
         </Box>

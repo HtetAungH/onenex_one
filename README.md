@@ -1,77 +1,81 @@
-# 🚀 Innovation & Growth Branding Project
+# 🚀 OneNex | High-Performance React Landing Page
 
-A **high‑performance React landing page** built to accurately recreate a reference UI with **smooth animations** and **live data integration**. This project was developed as a **technical interview task**, with a strong focus on **clean architecture**, **responsive design**, and **professional state management**.
+[![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite)](https://vitejs.dev/)
+[![MUI](https://img.shields.io/badge/MUI-7-007FFF?logo=mui)](https://mui.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-0055FF?logo=framer)](https://www.framer.com/motion/)
+[![TanStack Query](https://img.shields.io/badge/TanStack_Query-5-FF4154?logo=react-query)](https://tanstack.com/query/latest)
 
----
-
-## ✨ Key Highlights
-
-- Pixel‑accurate UI recreation from video reference
-- Smooth, production‑grade animations
-- Live market data with optimized API handling
-- Fully responsive layout
-- Clean, maintainable React architecture
+OneNex is a premium, high-fidelity React landing page designed to showcase cutting-edge digital solutions. This project emphasizes pixel-perfect UI recreation, production-grade animations, and seamless external data integration.
 
 ---
 
-## 🧠 Technical Decisions & Architecture
+## ✨ Project Overview
 
-### 1️⃣ State Management & API Integration
+This repository contains the source code for the OneNex branding project, optimized for performance, accessibility, and visual excellence.
 
-To handle external API data efficiently, **TanStack Query (React Query)** was implemented:
+### 🌟 Key Features
 
-- **Caching Strategy**  
-  Live market data is cached for **60 seconds** (`staleTime: 60000`) to reduce unnecessary network requests and improve performance.
-
-- **Loading & Error Handling**  
-  Declarative flags (`isLoading`, `isError`) are used to deliver a smooth user experience with proper loading indicators and graceful error states.
-
-- **API Optimization**  
-  `refetchOnWindowFocus` is disabled to avoid excessive API calls and prevent rate‑limit issues during development and review.
+- **Premium UI & UX**: Built with a sleek, modern dark-themed aesthetic featuring radial gradients and glassmorphism.
+- **Dynamic Animations**: Leverages **Framer Motion** for staggered entrance effects, scroll-triggered transitions, and pulsing indicator badges.
+- **Real-time Market Insights**: Integrated with the **Binance API** via **TanStack Query** to provide live crypto data with optimized caching and state management.
+- **Infinite Logo Marquee**: A custom, performance-optimized horizontal marquee showcasing technology partners.
+- **Fully Responsive**: Architected using **Material UI (MUI)** for a seamless experience across mobile, tablet, and desktop devices.
 
 ---
 
-### 2️⃣ UI & Animation Strategy
+## 🛠️ Tech Stack & Architecture
 
-- **Framer Motion**  
-  Used for high‑fidelity animations that closely match the reference design:
-  - Staggered entrance animations using `staggerChildren`
-  - Scroll‑based animations triggered via `whileInView`
-  - Smooth transitions for a premium visual feel
+### Core Technologies
 
-- **Infinite Logo Marquee**  
-  A seamless horizontal marquee with linear easing ensures smooth, continuous motion without performance drops.
+- **Frontend Framework**: [React 19](https://react.dev/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Material UI (MUI)](https://mui.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Data Fetching**: [TanStack Query (React Query)](https://tanstack.com/query/latest) & [Axios](https://axios-http.com/)
 
-- **Material UI (MUI)**  
-  Selected for its robust grid system, accessibility support, and easy customization, enabling a fully responsive and consistent layout.
+### Technical Implementation Details
 
----
-
-### 3️⃣ Visual Fidelity & Branding
-
-- **SVG Asset Integration**  
-  Technology logos are integrated as SVGs and styled using CSS filters (`brightness(0) invert(1)`) to maintain a clean, white‑on‑dark aesthetic.
-
-- **Parallax Motion Effect**  
-  Marquee rows move in opposite directions to create depth and replicate the sophisticated look of the original branding UI.
+- **State Management**: Using `QueryClient` for efficient caching (60s stale time) and declarative loading/error states.
+- **Animation Strategy**: Implemented using variants for reusable, staggered motion patterns.
+- **Theme Centralization**: All global styles, colors, and typography are managed in `src/theme.js` for consistency.
 
 ---
 
-## 🛠️ Installation & Setup
+## 📁 Project Structure
 
-### Clone the Repository
-
-```bash
-git clone https://github.com/your-username/your-repo-name.git
+```text
+src/
+ ├─ components/
+ │   ├─ Hero.jsx           # Premium intro with animations & marquee
+ │   ├─ LogoMarquee.jsx    # Smooth infinite horizontal scroll
+ │   ├─ CryptoLive.jsx     # Real-time data visualization via TanStack Query
+ │   └─ Footer.jsx         # Thematic footer with social integrations
+ ├─ theme.js               # Centralized MUI theme configuration
+ ├─ App.jsx                # Main application entry & Query Provider
+ └─ index.css              # Global baseline styles
 ```
 
-### Install Dependencies
+---
+
+## 🚀 Getting Started
+
+To run this project locally, follow these steps:
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/onenex.git
+cd onenex
+```
+
+### 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Run the Project Locally
+### 3. Start Development Server
 
 ```bash
 npm run dev
@@ -79,40 +83,42 @@ npm run dev
 
 ---
 
-## 📁 Project Structure
+## � Docker Support
 
+You can also run the application using Docker for a consistent, production-like environment:
+
+### Using Docker Compose (Recommended)
+
+```bash
+docker-compose up -d --build
 ```
-src/
- ├─ components/     # Reusable UI components (Hero, LogoMarquee, CryptoLive, Footer)
- ├─ App.jsx         # Application entry point with QueryClientProvider
- ├─ main.jsx        # React DOM rendering & global theme setup
-```
+
+The app will be available at [http://localhost:8080](http://localhost:8080).
+
+### Using Docker Directly
+
+1. **Build the image**:
+   ```bash
+   docker build -t onenex-app .
+   ```
+2. **Run the container**:
+   ```bash
+   docker run -p 8080:80 onenex-app
+   ```
 
 ---
 
-## 🧾 Meaningful Git History
+## �📌 Purpose & Context
 
-The development process is documented with clear, intentional commits:
+Developed as a showcase of modern frontend engineering practices, this project demonstrates:
 
-- `feat: initial UI structure and theme setup`
-- `feat: implement infinite marquee with parallax motion and icons`
-- `feat: integrate Binance API with TanStack Query (loading/error/caching)`
-- `style: enhance hero and footer with Framer Motion animations`
-- `docs: complete README with technical decisions and setup guide`
-
----
-
-## 📌 Purpose
-
-This project demonstrates:
-
-- Real‑world React best practices
-- Thoughtful API and state management
-- Attention to UI/UX details
-- Production‑ready animation techniques
-
-Ideal for **technical interviews**, **portfolio showcase**, and **frontend best‑practice demonstrations**.
+- Clean, component-based architecture.
+- Efficient handling of asynchronous data.
+- High-fidelity UI implementation from design references.
+- Production-ready performance optimizations.
 
 ---
 
-⭐ If you like this project, feel free to star the repository and explore the code!
+<div align="center">
+  <p>Built with ❤️ by OneNex Team</p>
+</div>

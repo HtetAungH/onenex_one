@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// CryptoLive.jsx
 import {
   Box,
   Typography,
@@ -19,21 +19,17 @@ const fetchCrypto = async () => {
   return data;
 };
 
-// Animation Variants for the Container (Stagger effect)
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2, // Items appear one by one
-    },
+    transition: { staggerChildren: 0.15 },
   },
 };
 
-// Animation Variants for individual Cards
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 const CryptoLive = () => {
@@ -51,41 +47,40 @@ const CryptoLive = () => {
           display: "flex",
           justifyContent: "center",
           py: 10,
-          bgcolor: "#ffffff",
+          bgcolor: "background.default",
         }}
       >
-        <CircularProgress />
+        <CircularProgress sx={{ color: "primary.main" }} />
+      </Box>
+    );
+
+  if (isError)
+    return (
+      <Box sx={{ py: 10, textAlign: "center", bgcolor: "background.default" }}>
+        <Typography color="error">Failed to load market data</Typography>
       </Box>
     );
 
   return (
-    <Box sx={{ bgcolor: "#ffffff", py: 10 }}>
+    <Box sx={{ bgcolor: "background.default", py: 12 }}>
       <Container>
-        {/* Animated Title */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+        <Typography
+          variant="h4"
+          sx={{
+            color: "primary.main",
+            mb: 6,
+            fontWeight: 800,
+            textAlign: "center",
+            textTransform: "uppercase",
+            letterSpacing: 1,
+          }}
         >
-          <Typography
-            variant="h4"
-            sx={{
-              color: "#001a4d",
-              mb: 5,
-              fontWeight: 800,
-              textAlign: "center",
-              textTransform: "uppercase",
-            }}
-          >
-            Live Market{" "}
-            <Box component="span" sx={{ color: "primary.main" }}>
-              Insights
-            </Box>
-          </Typography>
-        </motion.div>
+          Live Market{" "}
+          <Box component="span" sx={{ color: "secondary.main" }}>
+            Insights
+          </Box>
+        </Typography>
 
-        {/* Animated Grid Container */}
         <Grid
           container
           spacing={4}
@@ -95,72 +90,83 @@ const CryptoLive = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {data?.map((coin) => (
-            <Grid
-              size={{ xs: 12, sm: 6, md: 3 }}
-              key={coin.symbol}
-              component={motion.div}
-              variants={itemVariants}
-            >
-              <Paper
+          {data?.map((coin) => {
+            const isPositive = parseFloat(coin.priceChangePercent) >= 0;
+            return (
+              <Grid
+                size={{ xs: 12, sm: 6, md: 3 }}
+                key={coin.symbol}
                 component={motion.div}
-                whileHover={{
-                  y: -12,
-                  boxShadow: "0px 20px 40px rgba(0,0,0,0.1)",
-                  transition: { duration: 0.3 },
-                }}
-                sx={{
-                  p: 4,
-                  bgcolor: "#fcfcfc",
-                  border: "1px solid #eee",
-                  borderRadius: 4,
-                  textAlign: "center",
-                }}
+                variants={itemVariants}
               >
-                <Typography
-                  variant="h6"
-                  sx={{ fontWeight: 800, color: "#001a4d", mb: 1 }}
+                <Paper
+                  component={motion.div}
+                  whileHover={{
+                    y: -8,
+                    boxShadow: "0px 20px 40px rgba(0,26,77,0.15)",
+                    transition: { duration: 0.3 },
+                  }}
+                  sx={{
+                    p: 3.5,
+                    bgcolor: "background.paper",
+                    borderRadius: 4,
+                    textAlign: "center",
+                    border: "1px solid rgba(0,26,77,0.05)",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
                 >
-                  {coin.symbol.replace("USDT", "")}
-                </Typography>
-
-                <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
-                  $
-                  {parseFloat(coin.lastPrice).toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                  })}
-                </Typography>
-
-                {/* Pulsing Badge for Price Change */}
-                <motion.div
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                >
+                  {/* Subtle Top Accent */}
                   <Box
                     sx={{
-                      display: "inline-block",
-                      px: 1.5,
-                      py: 0.5,
-                      borderRadius: 1,
-                      bgcolor:
-                        parseFloat(coin.priceChangePercent) > 0
-                          ? "rgba(46, 125, 50, 0.1)"
-                          : "rgba(211, 47, 47, 0.1)",
-                      color:
-                        parseFloat(coin.priceChangePercent) > 0
-                          ? "#2e7d32"
-                          : "#d32f2f",
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "4px",
+                      bgcolor: isPositive ? "success.main" : "error.main",
+                      opacity: 0.8,
+                    }}
+                  />
+
+                  <Typography
+                    variant="h6"
+                    sx={{ fontWeight: 800, color: "text.primary", mb: 1 }}
+                  >
+                    {coin.symbol.replace("USDT", "")}
+                  </Typography>
+
+                  <Typography
+                    variant="h5"
+                    sx={{ fontWeight: 700, mb: 2, color: "text.primary" }}
+                  >
+                    $
+                    {parseFloat(coin.lastPrice).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                    })}
+                  </Typography>
+
+                  <Box
+                    sx={{
+                      display: "inline-flex",
+                      px: 2,
+                      py: 0.75,
+                      borderRadius: 2,
+                      bgcolor: isPositive
+                        ? "rgba(76, 175, 80, 0.1)"
+                        : "rgba(244, 67, 54, 0.1)",
+                      color: isPositive ? "success.main" : "error.main",
                     }}
                   >
                     <Typography variant="body2" sx={{ fontWeight: 700 }}>
-                      {parseFloat(coin.priceChangePercent) > 0 ? "+" : ""}
-                      {coin.priceChangePercent}%
+                      {isPositive ? "+" : ""}
+                      {parseFloat(coin.priceChangePercent).toFixed(2)}%
                     </Typography>
                   </Box>
-                </motion.div>
-              </Paper>
-            </Grid>
-          ))}
+                </Paper>
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
     </Box>

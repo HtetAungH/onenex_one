@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Box, Typography, Button, Container, Stack } from "@mui/material";
 import { ArrowForward } from "@mui/icons-material";
-import LogoMarquee from "./LogoMarquee";
 import { motion } from "framer-motion";
 
 const Hero = () => {
@@ -10,15 +9,29 @@ const Hero = () => {
       sx={{
         minHeight: "100vh",
         background:
-          "radial-gradient(circle at 50% 50%, #1a3a8a 0%, #000000 100%)",
+          "radial-gradient(circle at 50% 30%, #1a3a8a 0%, #001a4d 60%, #000000 100%)",
         display: "flex",
         flexDirection: "column",
+        position: "relative",
+        overflow: "hidden",
       }}
     >
-      {/* 1. TOP MARQUEE */}
-      <LogoMarquee />
+      {/* Decorative Glow */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: "-20%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "600px",
+          height: "600px",
+          background: "rgba(0, 212, 255, 0.15)",
+          filter: "blur(100px)",
+          borderRadius: "50%",
+          zIndex: 0,
+        }}
+      />
 
-      {/* 2. MAIN CONTENT */}
       <Container
         sx={{
           flexGrow: 1,
@@ -28,37 +41,39 @@ const Hero = () => {
           alignItems: "center",
           textAlign: "center",
           pb: 10,
+          position: "relative",
+          zIndex: 1,
         }}
       >
-        {/* Technology Partners Label */}
         <Typography
           variant="subtitle2"
           sx={{
-            color: "white",
-            mb: 4,
-            letterSpacing: 3,
-            opacity: 0.7,
-            fontWeight: 300,
+            color: "rgba(255,255,255,0.7)",
+            mb: 3,
+            letterSpacing: 4,
+            fontWeight: 600,
           }}
         >
           OUR TECHNOLOGY PARTNERS
         </Typography>
 
-        {/* Featured Partners Logos */}
         <Stack
           direction="row"
-          spacing={6}
-          sx={{ mb: 8, flexWrap: "wrap", justifyContent: "center" }}
+          spacing={4}
+          sx={{ mb: 6, flexWrap: "wrap", justifyContent: "center" }}
         >
-          {["amazon web services", "new relic", "DATADOG"].map((partner) => (
+          {["AWS", "NEW RELIC", "DATADOG"].map((partner) => (
             <Typography
               key={partner}
-              variant="h5"
+              variant="h6"
               sx={{
-                color: "white",
-                fontWeight: 900,
-                letterSpacing: -0.5,
-                opacity: 0.9,
+                color: "rgba(255,255,255,0.6)",
+                fontWeight: 700,
+                letterSpacing: 1,
+                border: "1px solid rgba(255,255,255,0.2)",
+                px: 2,
+                py: 0.5,
+                borderRadius: 2,
               }}
             >
               {partner}
@@ -66,53 +81,57 @@ const Hero = () => {
           ))}
         </Stack>
 
-        {/* Hero Title */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
           <Typography
-            variant="h2"
+            variant="h1"
             sx={{
-              fontWeight: 800,
               fontSize: { xs: "2.5rem", md: "5rem" },
               color: "white",
-              lineHeight: 1,
+              lineHeight: 1.1,
+              mb: 2,
             }}
           >
             TURN YOUR IDEA INTO
           </Typography>
           <Typography
-            variant="h2"
+            variant="h1"
             sx={{
-              fontWeight: 800,
               fontSize: { xs: "2.5rem", md: "5rem" },
-              WebkitTextStroke: "1px #ffffff",
               color: "transparent",
-              mb: 6,
+              WebkitTextStroke: "1px rgba(255,255,255,0.8)",
+              lineHeight: 1.1,
+              mb: 8,
             }}
           >
             BUSINESS SOLUTIONS
           </Typography>
         </motion.div>
 
-        {/* CTA Button */}
-        <Button
-          variant="outlined"
-          endIcon={<ArrowForward />}
-          sx={{
-            color: "white",
-            borderColor: "white",
-            borderRadius: "50px",
-            px: 5,
-            py: 2,
-            fontSize: "1rem",
-            "&:hover": { bgcolor: "white", color: "black" },
-          }}
-        >
-          GET IN TOUCH
-        </Button>
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <Button
+            variant="contained"
+            endIcon={<ArrowForward />}
+            sx={{
+              bgcolor: "secondary.main",
+              color: "#001a4d",
+              borderRadius: "50px",
+              px: 6,
+              py: 2,
+              fontSize: "1.1rem",
+              boxShadow: "0 0 20px rgba(0, 212, 255, 0.4)",
+              "&:hover": {
+                bgcolor: "secondary.light",
+                boxShadow: "0 0 30px rgba(0, 212, 255, 0.6)",
+              },
+            }}
+          >
+            GET IN TOUCH
+          </Button>
+        </motion.div>
       </Container>
     </Box>
   );
